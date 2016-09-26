@@ -4,6 +4,7 @@ import uk.co.martmarma.library.behaviour.LibraryInterface;
 import uk.co.martmarma.library.domain.Author;
 import uk.co.martmarma.library.domain.Book;
 
+import java.util.List;
 import java.util.Set;
 
 public class Library implements LibraryInterface {
@@ -20,6 +21,11 @@ public class Library implements LibraryInterface {
 
     @Override
     public Set<Book> getBooksByAuthor(Author author) {
+        return null;
+    }
+
+    @Override
+    public List<Book> getAllBooks() {
         return null;
     }
 }
