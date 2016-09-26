@@ -1,0 +1,12 @@
+/.gradle
+/.idea
+**/build
+**/logs
+**/*.iml
+/*.iws
+/.bundle/
+.gems/
+Gemfile.lock
+/out/
+**/tmp
+classes

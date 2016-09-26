@@ -1,0 +1,22 @@
+group 'uk.co.martmarma'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+repositories {
+    maven { url 'https://dev.bbc.co.uk/artifactory/repo' }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.slf4j:slf4j-api:1.7.12"
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.7'
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
