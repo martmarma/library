@@ -1,5 +1,6 @@
 package uk.co.martmarma.library;
 
+import org.junit.Before;
 import org.junit.Test;
 import uk.co.martmarma.library.domain.Author;
 import uk.co.martmarma.library.domain.Book;
@@ -15,24 +16,35 @@ import static org.junit.Assert.*;
 public class LibraryTest {
 
 
+    private Library underTest;
+    private Set<Author> authors;
+    private Book book;
+
+    @Before
+    public void setUp() throws Exception {
+        underTest = new Library();
+        authors = new HashSet<>(Arrays.asList(new Author(1, "John Smith")));
+        book = new Book("title", "123", authors);
+    }
+
     @Test
     public void itShouldReturnAllAddedBooks() throws Exception {
-
-        Library underTest = new Library();
-
-        Set<Author> authors = new HashSet<>(Arrays.asList(new Author(1, "John Smith")));
-
-        Book book = new Book("title", "123", authors);
-
         underTest.addBook(book);
-
         List<Book> allBooks = underTest.getAllBooks();
-
-
         assertTrue(allBooks.size() == 1);
-
-
         assertThat(allBooks, contains(book));
+    }
+
+    @Test
+    public void itFindsBooksByAuthor(){
+        Author author = new Author(8, "Sue Bell");
+        HashSet<Author> authors = new HashSet<>(Arrays.asList(author));
+        Book needle = new Book("Needle", "1234", authors);
+        underTest.addBook(needle);
+
+        Set<Book> booksByAuthor = underTest.getBooksByAuthor(author);
+        assertTrue(booksByAuthor.size() == 1);
+        assertThat(booksByAuthor, contains(needle));
     }
 
 }
