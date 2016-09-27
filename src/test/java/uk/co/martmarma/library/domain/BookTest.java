@@ -44,4 +44,13 @@ public class BookTest {
         assertEquals(bookOne, bookTwo);
     }
 
+    @Test
+    public void testInequality(){
+        // different title and different isbn
+        Book bookOne = new Book("Title", "23345", authors);
+        Book bookTwo = new Book("Different Title", "2345", authors);
+
+        assertNotEquals("Books are not equal", bookOne, bookTwo);
+    }
+
 }
