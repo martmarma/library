@@ -1,9 +1,13 @@
 package uk.co.martmarma.library;
 
 import org.junit.Test;
+import uk.co.martmarma.library.domain.Author;
 import uk.co.martmarma.library.domain.Book;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.*;
@@ -16,7 +20,9 @@ public class LibraryTest {
 
         Library underTest = new Library();
 
-        Book book = new Book("title", "123");
+        Set<Author> authors = new HashSet<>(Arrays.asList(new Author(1, "John Smith")));
+
+        Book book = new Book("title", "123", authors);
 
         underTest.addBook(book);
 
