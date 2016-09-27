@@ -36,5 +36,12 @@ public class BookTest {
         assertEquals(bookOne, bookTwo);
     }
 
+    @Test
+    public void testEqualityByISBN(){
+        Book bookOne = new Book("Some New Title", "12345", authors);
+        Book bookTwo = new Book("Title", "12345", authors);
+
+        assertEquals(bookOne, bookTwo);
+    }
 
 }

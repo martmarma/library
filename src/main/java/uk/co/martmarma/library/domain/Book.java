@@ -1,7 +1,8 @@
 package uk.co.martmarma.library.domain;
 
-
 import java.util.Set;
+import java.util.Objects;
+
 
 public class Book {
 
@@ -21,5 +22,20 @@ public class Book {
 
     public String getIsbn() {
         return isbn;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(title, book.title) &&
+                Objects.equals(authors, book.authors) ||
+                Objects.equals(isbn, book.isbn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, isbn);
     }
 }

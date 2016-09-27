@@ -10,3 +10,4 @@ Gemfile.lock
 /out/
 **/tmp
 classes
+.DS_Store
