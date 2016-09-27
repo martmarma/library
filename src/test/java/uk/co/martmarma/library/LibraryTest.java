@@ -16,7 +16,7 @@ public class LibraryTest {
 
         Library underTest = new Library();
 
-        Book book = new Book();
+        Book book = new Book("title", "123");
 
         underTest.addBook(book);
 
