@@ -9,8 +9,11 @@ import java.util.Set;
 
 public interface LibraryInterface {
 
-  void addBook(Book book);
+    void addBook(Book book);
+
     Book getBook(String isbn);
+
     Set<Book> getBooksByAuthor(Author author);
+
     List<Book> getAllBooks();
 }

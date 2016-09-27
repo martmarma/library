@@ -5,13 +5,16 @@ import uk.co.martmarma.library.domain.Author;
 import uk.co.martmarma.library.domain.Book;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 
 public class Library implements LibraryInterface {
 
+    List<Book> books = new ArrayList<Book>();
+
     @Override
     public void addBook(Book book) {
-
+        books.add(book);
     }
 
     @Override
@@ -26,6 +29,7 @@ public class Library implements LibraryInterface {
 
     @Override
     public List<Book> getAllBooks() {
-        return null;
+        return books;
     }
+
 }

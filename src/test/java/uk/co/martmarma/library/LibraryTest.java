@@ -12,12 +12,19 @@ public class LibraryTest {
 
 
     @Test
-    public void getBook() throws Exception {
+    public void itShouldReturnAllAddedBooks() throws Exception {
+
         Library underTest = new Library();
+
         Book book = new Book();
+
         underTest.addBook(book);
 
         List<Book> allBooks = underTest.getAllBooks();
+
+
+        assertTrue(allBooks.size() == 1);
+
 
         assertThat(allBooks, contains(book));
     }
