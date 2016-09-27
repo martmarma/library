@@ -45,8 +45,7 @@ public class BookTest {
     }
 
     @Test
-    public void testInequality(){
-        // different title and different isbn
+    public void testInequalityByTitleAndIsbn(){
         Book bookOne = new Book("Title", "23345", authors);
         Book bookTwo = new Book("Different Title", "2345", authors);
 
