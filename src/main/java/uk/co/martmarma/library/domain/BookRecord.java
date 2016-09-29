@@ -5,6 +5,7 @@ public class BookRecord {
     private final Book book;
     private  int copies;
 
+
     public BookRecord(final Book book, final int copies){
 
         this.book = book;

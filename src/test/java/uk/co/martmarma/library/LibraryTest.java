@@ -5,11 +5,12 @@ import org.junit.Test;
 import uk.co.martmarma.library.domain.Author;
 import uk.co.martmarma.library.domain.Book;
 import uk.co.martmarma.library.domain.BookRecord;
+import uk.co.martmarma.library.domain.Loan;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.TemporalAmount;
+import java.util.*;
 
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasItem;
@@ -117,6 +118,23 @@ public class LibraryTest {
         addAllBoooks();
         BookRecord bookRecordForBook = underTest.getBookRecordForBook(book2);
         assertTrue(bookRecordForBook.getCopies() == 2);
+    }
+
+    @Test
+    public void itIssuesOneMonthLoan(){
+        addAllBoooks();
+        LocalDate expectedReturnDate = LocalDate.now().plus(Period.ofMonths(1));
+        Loan loan = underTest.loanBook(book);
+        assertEquals(expectedReturnDate, loan.getReturnDate());
+    }
+
+    @Test
+    public void itShouldBeAbleToTellTotalBooksOnLoan(){
+        addAllBoooks();
+        underTest.loanBook(book);
+        underTest.loanBook(book1);
+        List<Loan> allLoans = underTest.getAllLoans();
+        assertTrue(allLoans.size() == 2);
     }
 
 

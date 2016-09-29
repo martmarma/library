@@ -2,6 +2,8 @@ package uk.co.martmarma.library.domain;
 
 import org.junit.Test;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -12,7 +14,15 @@ public class LoanTest {
 
     @Test
     public void itShouldDetectAnOverdueLoan(){
-        Loan underTest = new Loan( new Book("title", "isbn", getAuthors()), new Date(123456l));
+        LocalDate someDateInThePast = LocalDate.now().minusDays(12l);
+        Loan underTest = new Loan( new Book("title", "isbn", getAuthors()), someDateInThePast);
         assertTrue(underTest.isOverdue());
+    }
+
+    @Test
+    public void itShouldDetectNonOverdueLoans(){
+        LocalDate someDateInTheFuture = LocalDate.now().plus(Period.ofMonths(1));
+        Loan loan = new Loan(new Book("title", "isbn", getAuthors()), someDateInTheFuture);
+        assertFalse(loan.isOverdue());
     }
 }
