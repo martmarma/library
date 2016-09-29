@@ -47,7 +47,7 @@ public class LibraryTest {
     public void itFindsBooksByAuthor(){
         Author author = new Author(8, "Sue Bell");
 
-        Book needle = new Book("Needle", "1234", getAuthors());
+        Book needle = new Book("Needle", "1234", new HashSet<>(Arrays.asList(author)));
         underTest.addBook(needle);
 
         Set<Book> booksByAuthor = underTest.getBooksByAuthor(author);
@@ -112,7 +112,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void itRetundsTheBookRecord(){
+    public void itRetunsTheBookRecord(){
         addAllBoooks();
         addAllBoooks();
         BookRecord bookRecordForBook = underTest.getBookRecordForBook(book2);
