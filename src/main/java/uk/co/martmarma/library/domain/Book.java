@@ -24,6 +24,10 @@ public class Book {
         return isbn;
     }
 
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

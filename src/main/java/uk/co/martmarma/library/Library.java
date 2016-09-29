@@ -4,9 +4,7 @@ import uk.co.martmarma.library.behaviour.LibraryInterface;
 import uk.co.martmarma.library.domain.Author;
 import uk.co.martmarma.library.domain.Book;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Set;
+import java.util.*;
 
 public class Library implements LibraryInterface {
 
@@ -19,12 +17,27 @@ public class Library implements LibraryInterface {
 
     @Override
     public Book getBook(String isbn) {
+
+        for (Book book : books) {
+            if (isbn == book.getIsbn()) {
+                return book;
+            }
+        }
         return null;
     }
 
     @Override
     public Set<Book> getBooksByAuthor(Author author) {
-        return null;
+        Set<Book> foundBooks = new HashSet<>();
+
+        for(Book myBook:books){
+            Set<Author> authors = myBook.getAuthors();
+            if (authors.contains(author)){
+                foundBooks.add(myBook);
+            }
+        }
+
+        return foundBooks;
     }
 
     @Override
