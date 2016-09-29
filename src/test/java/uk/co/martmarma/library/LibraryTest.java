@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.*;
 
 public class LibraryTest {
@@ -18,7 +19,7 @@ public class LibraryTest {
 
     private Library underTest;
     private Set<Author> authors;
-    private Book book, book1;
+    private Book book, book1, book2;
 
     @Before
     public void setUp() throws Exception {
@@ -26,6 +27,7 @@ public class LibraryTest {
         authors = new HashSet<>(Arrays.asList(new Author(1, "John Smith")));
         book = new Book("title", "123", authors);
         book1 = new Book("New Title", "999", authors);
+        book2 = new Book("title", "154878", authors);
     }
 
     @Test
@@ -62,18 +64,45 @@ public class LibraryTest {
 
     @Test
     public void itFindsABookByISBN(){
-        underTest.addBook(book);
-        underTest.addBook(book1);
+        addAllBoooks();
         Book foundBook = underTest.getBook("999");
         assertEquals(book1, foundBook);
     }
 
     @Test
     public void itFindsAnotherBookByISBN(){
-        underTest.addBook(book);
-        underTest.addBook(book1);
+        addAllBoooks();
         Book foundBook = underTest.getBook("123");
         assertEquals(book, foundBook);
+    }
+
+    @Test
+    public void itFindsABookByTitle(){
+        addAllBoooks();
+        List<Book> booksByTitle = underTest.getBooksByTitle("New Title");
+        assertTrue(booksByTitle.size() == 1);
+        assertThat(booksByTitle, contains(book1));
+    }
+
+    @Test
+    public void itFindsABookByAnotherTitle(){
+        addAllBoooks();
+        List<Book> booksByTitle = underTest.getBooksByTitle("title");
+        assertTrue(booksByTitle.size() == 2);
+        assertThat(booksByTitle, contains(book, book2));
+    }
+
+    @Test
+    public void itReturnsAnEmptyListWhenTitleNotFound(){
+        List<Book> booksByTitle = underTest.getBooksByTitle("some title");
+        assertTrue(booksByTitle.isEmpty());
+    }
+
+
+    private void addAllBoooks() {
+        underTest.addBook(book);
+        underTest.addBook(book1);
+        underTest.addBook(book2);
     }
 
 }

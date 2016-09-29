@@ -45,4 +45,17 @@ public class Library implements LibraryInterface {
         return books;
     }
 
+    @Override
+    public List<Book> getBooksByTitle(String title) {
+        List<Book> listOfBooks = new ArrayList<>();
+        for (Book book : books) {
+            if(title.equals(book.getTitle())){
+                listOfBooks.add(book);
+            }
+        }
+
+
+        return listOfBooks;
+    }
+
 }

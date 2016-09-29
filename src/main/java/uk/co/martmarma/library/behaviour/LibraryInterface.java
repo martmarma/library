@@ -16,4 +16,6 @@ public interface LibraryInterface {
     Set<Book> getBooksByAuthor(Author author);
 
     List<Book> getAllBooks();
+
+    List<Book> getBooksByTitle(String title);
 }
