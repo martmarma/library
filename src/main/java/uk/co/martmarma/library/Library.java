@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Library implements LibraryInterface {
 
-    List<Book> books = new ArrayList<Book>();
+    List<Book> books = new ArrayList<>();
 
     @Override
     public void addBook(Book book) {
