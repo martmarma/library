@@ -19,7 +19,7 @@ public class Library implements LibraryInterface {
     public Book getBook(String isbn) {
 
         for (Book book : books) {
-            if (isbn == book.getIsbn()) {
+            if (isbn.equals(book.getIsbn())) {
                 return book;
             }
         }
