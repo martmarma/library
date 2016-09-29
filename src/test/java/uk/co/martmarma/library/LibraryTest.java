@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import uk.co.martmarma.library.domain.Author;
 import uk.co.martmarma.library.domain.Book;
+import uk.co.martmarma.library.domain.BookRecord;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -24,10 +25,14 @@ public class LibraryTest {
     @Before
     public void setUp() throws Exception {
         underTest = new Library();
-        authors = new HashSet<>(Arrays.asList(new Author(1, "John Smith")));
+        authors = getAuthors();
         book = new Book("title", "123", authors);
         book1 = new Book("New Title", "999", authors);
         book2 = new Book("title", "154878", authors);
+    }
+
+    public static HashSet<Author> getAuthors() {
+        return new HashSet<>(Arrays.asList(new Author(1, "John Smith")));
     }
 
     @Test
@@ -41,8 +46,8 @@ public class LibraryTest {
     @Test
     public void itFindsBooksByAuthor(){
         Author author = new Author(8, "Sue Bell");
-        HashSet<Author> authors = new HashSet<>(Arrays.asList(author));
-        Book needle = new Book("Needle", "1234", authors);
+
+        Book needle = new Book("Needle", "1234", getAuthors());
         underTest.addBook(needle);
 
         Set<Book> booksByAuthor = underTest.getBooksByAuthor(author);
@@ -96,6 +101,22 @@ public class LibraryTest {
     public void itReturnsAnEmptyListWhenTitleNotFound(){
         List<Book> booksByTitle = underTest.getBooksByTitle("some title");
         assertTrue(booksByTitle.isEmpty());
+    }
+
+    @Test
+    public void itReturnsNumberOfCopiesHeld(){
+        addAllBoooks();
+        addAllBoooks();
+        int numberOfCopiesHeld = underTest.getNumberOfCopiesHeld(book1);
+        assertTrue(numberOfCopiesHeld == 2);
+    }
+
+    @Test
+    public void itRetundsTheBookRecord(){
+        addAllBoooks();
+        addAllBoooks();
+        BookRecord bookRecordForBook = underTest.getBookRecordForBook(book2);
+        assertTrue(bookRecordForBook.getCopies() == 2);
     }
 
 

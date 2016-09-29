@@ -3,6 +3,7 @@ package uk.co.martmarma.library;
 import uk.co.martmarma.library.behaviour.LibraryInterface;
 import uk.co.martmarma.library.domain.Author;
 import uk.co.martmarma.library.domain.Book;
+import uk.co.martmarma.library.domain.BookRecord;
 
 import java.util.*;
 
@@ -56,6 +57,16 @@ public class Library implements LibraryInterface {
 
 
         return listOfBooks;
+    }
+
+    @Override
+    public int getNumberOfCopiesHeld(Book book) {
+        return 0;
+    }
+
+    @Override
+    public BookRecord getBookRecordForBook(Book book) {
+        return null;
     }
 
 }

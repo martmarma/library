@@ -3,6 +3,7 @@ package uk.co.martmarma.library.behaviour;
 
 import uk.co.martmarma.library.domain.Author;
 import uk.co.martmarma.library.domain.Book;
+import uk.co.martmarma.library.domain.BookRecord;
 
 import java.util.List;
 import java.util.Set;
@@ -18,4 +19,9 @@ public interface LibraryInterface {
     List<Book> getAllBooks();
 
     List<Book> getBooksByTitle(String title);
+
+    int getNumberOfCopiesHeld(Book book);
+
+    BookRecord getBookRecordForBook(Book book);
+
 }
