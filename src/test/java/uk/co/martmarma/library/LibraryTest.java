@@ -136,8 +136,7 @@ public class LibraryTest {
         List<Loan> allLoans = underTest.getAllLoans();
         assertTrue(allLoans.size() == 2);
     }
-
-
+    
     private void addAllBoooks() {
         underTest.addBook(book);
         underTest.addBook(book1);

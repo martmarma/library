@@ -5,7 +5,9 @@ import uk.co.martmarma.library.domain.Author;
 import uk.co.martmarma.library.domain.Book;
 import uk.co.martmarma.library.domain.BookRecord;
 import uk.co.martmarma.library.domain.Loan;
+import java.time.LocalDate;
 
+import java.time.Period;
 import java.util.*;
 
 public class Library implements LibraryInterface {
@@ -63,22 +65,35 @@ public class Library implements LibraryInterface {
 
     @Override
     public int getNumberOfCopiesHeld(Book book) {
-        return 0;
+        List<Book> listOfCopiesHeld = getBooksByTitle(book.getTitle());
+        List<Book> listOfBooksWithMatchingIsbn = new ArrayList<>();
+        for (Book book1 : listOfCopiesHeld) {
+            if ((book1.getIsbn().equals(book.getIsbn()))){
+                listOfBooksWithMatchingIsbn.add(book1);
+
+            }
+        }
+        return listOfBooksWithMatchingIsbn.size();
+        //try to do the same with just listOfCopiesHeld and removing when !(sth.equals(sth_else))
     }
 
     @Override
     public BookRecord getBookRecordForBook(Book book) {
-        return null;
+        BookRecord ABookRecord = new BookRecord(book, getNumberOfCopiesHeld(book));
+
+        return ABookRecord;
     }
 
     @Override
     public Loan loanBook(Book book) {
-        return null;
+        Loan ALoan = new Loan(book, LocalDate.now().plus(Period.ofMonths(1)));
+        booksOnLoan.add(ALoan);
+        return ALoan;
     }
 
     @Override
     public List<Loan> getAllLoans() {
-        return null;
+        return booksOnLoan;
     }
 
 }
