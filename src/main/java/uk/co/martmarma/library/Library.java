@@ -1,10 +1,8 @@
 package uk.co.martmarma.library;
 
 import uk.co.martmarma.library.behaviour.LibraryInterface;
-import uk.co.martmarma.library.domain.Author;
-import uk.co.martmarma.library.domain.Book;
-import uk.co.martmarma.library.domain.BookRecord;
-import uk.co.martmarma.library.domain.Loan;
+import uk.co.martmarma.library.domain.*;
+
 import java.time.LocalDate;
 
 import java.time.Period;
@@ -65,35 +63,43 @@ public class Library implements LibraryInterface {
 
     @Override
     public int getNumberOfCopiesHeld(Book book) {
-        List<Book> listOfCopiesHeld = getBooksByTitle(book.getTitle());
-        List<Book> listOfBooksWithMatchingIsbn = new ArrayList<>();
-        for (Book book1 : listOfCopiesHeld) {
-            if ((book1.getIsbn().equals(book.getIsbn()))){
-                listOfBooksWithMatchingIsbn.add(book1);
+        int numberOfCopies = 0;
 
+        for (Book book1 : books) {
+            if (book1.equals(book)){
+                numberOfCopies ++;
             }
         }
-        return listOfBooksWithMatchingIsbn.size();
-        //try to do the same with just listOfCopiesHeld and removing when !(sth.equals(sth_else))
+        return numberOfCopies;
     }
 
     @Override
     public BookRecord getBookRecordForBook(Book book) {
-        BookRecord ABookRecord = new BookRecord(book, getNumberOfCopiesHeld(book));
+        BookRecord aBookRecord = new BookRecord(book, getNumberOfCopiesHeld(book));
 
-        return ABookRecord;
+        return aBookRecord;
     }
 
     @Override
     public Loan loanBook(Book book) {
-        Loan ALoan = new Loan(book, LocalDate.now().plus(Period.ofMonths(1)));
-        booksOnLoan.add(ALoan);
-        return ALoan;
+        Loan aLoan = new Loan(book, LocalDate.now().plus(Period.ofMonths(1)));
+        booksOnLoan.add(aLoan);
+        return aLoan;
     }
 
     @Override
     public List<Loan> getAllLoans() {
         return booksOnLoan;
     }
+
+    public Fine issueFine(Loan expiredLoan) {
+        Fine theFine = new Fine(expiredLoan);
+        if (expiredLoan.isOverdue() == false) {
+            return null;
+        }
+
+        return theFine;
+    }
+
 
 }

@@ -6,6 +6,7 @@ import uk.co.martmarma.library.domain.Author;
 import uk.co.martmarma.library.domain.Book;
 import uk.co.martmarma.library.domain.BookRecord;
 import uk.co.martmarma.library.domain.Loan;
+import uk.co.martmarma.library.domain.Fine;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -29,7 +30,7 @@ public class LibraryTest {
         authors = getAuthors();
         book = new Book("title", "123", authors);
         book1 = new Book("New Title", "999", authors);
-        book2 = new Book("title", "154878", authors);
+        book2 = new Book("title2", "154878", authors);
     }
 
     public static HashSet<Author> getAuthors() {
@@ -94,8 +95,8 @@ public class LibraryTest {
     public void itFindsABookByAnotherTitle(){
         addAllBoooks();
         List<Book> booksByTitle = underTest.getBooksByTitle("title");
-        assertTrue(booksByTitle.size() == 2);
-        assertThat(booksByTitle, contains(book, book2));
+        assertTrue(booksByTitle.size() == 1);
+        assertThat(booksByTitle, contains(book));
     }
 
     @Test
@@ -142,7 +143,15 @@ public class LibraryTest {
         LocalDate inThePast = LocalDate.now().minus(Period.ofDays(3));
         Loan expiredLoan = new Loan(book1, inThePast);
         Fine fine = underTest.issueFine(expiredLoan);
-        assertThat(fine.getAmount() == 3);//assume £1 per day
+        assertTrue(fine.getAmount() == 3);//assume £1 per day
+    }
+
+    @Test
+    public void itDoesNotIssueFinesIfLoanInDate(){
+        LocalDate inTheFuture = LocalDate.now().plus(Period.ofDays(3));
+        Loan loan = new Loan(book1, inTheFuture);
+        Fine fine = underTest.issueFine(loan);
+        assertNull(fine);
     }
     
     private void addAllBoooks() {
