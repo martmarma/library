@@ -13,7 +13,7 @@ public class BookRecord {
     }
 
     public void addCopies(final int copies){
-
+        this.copies = this.copies + copies;
     }
 
     public Book getBook() {
@@ -24,7 +24,7 @@ public class BookRecord {
         return copies;
     }
 
-    public void removeCopies(int i) {
-
+    public void removeCopies(final int copies) {
+        this.copies = this.copies - copies;
     }
 }

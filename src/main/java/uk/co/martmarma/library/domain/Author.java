@@ -12,8 +12,7 @@ public class Author {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Author author = (Author) o;
-        return id == author.id &&
-                Objects.equals(name, author.name);
+        return id == author.id;
     }
 
     @Override

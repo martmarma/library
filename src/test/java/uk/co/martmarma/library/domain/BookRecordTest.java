@@ -9,6 +9,13 @@ import static org.junit.Assert.*;
 public class BookRecordTest {
 
     @Test
+    public void itReturnsCorrectNumberOfCopies(){
+        Book book = new Book("title", "isbn", LibraryTest.getAuthors());
+        BookRecord one = new BookRecord(book, 3);
+        assertTrue(one.getCopies() == 3);
+    }
+
+    @Test
     public void itShouldIncreaseCopiesHeld(){
         Book book = new Book("title", "isbn", LibraryTest.getAuthors());
         BookRecord one = new BookRecord(book, 3);

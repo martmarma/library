@@ -22,6 +22,13 @@ public class Loan {
     }
 
     public boolean isOverdue(){
-        return false;
+        int difference = this.returnDate.compareTo(LocalDate.now());
+
+        if (difference >= 0){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }

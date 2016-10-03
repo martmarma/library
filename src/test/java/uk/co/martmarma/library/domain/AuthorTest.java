@@ -20,4 +20,10 @@ public class AuthorTest {
         assertNotEquals(authorOne, authorTwo);
     }
 
+    @Test
+    public void testEqualityById() {
+        Author authorOne = new Author(1, "Mary Berry");
+        Author authorTwo = new Author(1, "Mary B.");
+        assertEquals(authorOne, authorTwo);
+    }
 }

@@ -25,4 +25,11 @@ public class LoanTest {
         Loan loan = new Loan(new Book("title", "isbn", getAuthors()), someDateInTheFuture);
         assertFalse(loan.isOverdue());
     }
+
+    @Test
+    public void itShouldNotBeOverdueOnTheSameDate() {
+        LocalDate presentDate = LocalDate.now();
+        Loan loan = new Loan(new Book("title", "isbn", getAuthors()), presentDate);
+        assertFalse(loan.isOverdue());
+    }
 }
