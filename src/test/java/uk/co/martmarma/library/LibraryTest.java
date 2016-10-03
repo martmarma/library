@@ -136,6 +136,14 @@ public class LibraryTest {
         List<Loan> allLoans = underTest.getAllLoans();
         assertTrue(allLoans.size() == 2);
     }
+
+    @Test
+    public void itDetectsFines(){
+        LocalDate inThePast = LocalDate.now().minus(Period.ofDays(3));
+        Loan expiredLoan = new Loan(book1, inThePast);
+        Fine fine = underTest.issueFine(expiredLoan);
+        assertThat(fine.getAmount() == 3);//assume £1 per day
+    }
     
     private void addAllBoooks() {
         underTest.addBook(book);
